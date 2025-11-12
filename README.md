@@ -45,12 +45,38 @@ QuickInvoice is a lightweight, full-stack invoice management application that en
 
 ## 🖼️ Screenshots
 
-- Landing page: `./invoice-generator-v2/src/assets/homepage.png`  
-- Create invoice: `./invoice-generator-v2/src/assets/create-invoice.png`  
-- Invoice preview: `./invoice-generator-v2/src/assets/invoice-template.png`
+### 🏠 Landing Page
+![Landing Page](./invoice-generator-v2/src/assets/homepage.png)
+
+### 🧾 Create Invoice
+![Create Invoice](./invoice-generator-v2/src/assets/create-invoice.png)
+
+### 📄 Invoice Preview 
+![Invoice Preview](./invoice-generator-v2/src/assets/invoice-template.png)
 
 ---
 
 ## ⚙️ Environment Setup
 
-### Frontend — `invoice-generator-frontend/.env`
+### 🌐 Frontend (`.env`)
+VITE_CLERK_PUBLISHABLE_KEY=<your_clerk_key>  
+VITE_API_BASE_URL=http://localhost:8080/api  
+VITE_CLOUDINARY_CLOUD_NAME=<cloud_name>  
+VITE_CLOUDINARY_UPLOAD_PRESET=<upload_preset>  
+
+---
+
+### ☕ Backend (`application.properties`)
+spring.data.mongodb.uri=mongodb+srv://<user>:<password>@cluster.mongodb.net/invoicedb  
+
+# Clerk Authentication  
+clerk.issuer=https://<your-clerk-api>  
+clerk.jwks-url=https://<your-clerk-jwks-url>  
+clerk.webhook.secret=<your-webhook-secret>  
+
+# Brevo Email Setup  
+spring.mail.host=smtp-relay.sendinblue.com  
+spring.mail.port=587  
+spring.mail.username=<your_email>  
+spring.mail.password=<your_password>  
+spring.mail.properties.mail.smtp.from=no-reply@quickinvoice.com  
