@@ -1,8 +1,8 @@
-package in.bushansirgur.invoicegeneratorapi.controller;
+package in.amantiwari.invoicegeneratorapi.controller;
 
-import in.bushansirgur.invoicegeneratorapi.entity.Invoice;
-import in.bushansirgur.invoicegeneratorapi.service.EmailService;
-import in.bushansirgur.invoicegeneratorapi.service.InvoiceService;
+import in.amantiwari.invoicegeneratorapi.entity.Invoice;
+import in.amantiwari.invoicegeneratorapi.config.EmailService;
+import in.amantiwari.invoicegeneratorapi.config.InvoiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

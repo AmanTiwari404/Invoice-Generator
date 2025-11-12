@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.security;
+package in.amantiwari.invoicegeneratorapi.security;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +28,9 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
     @Value("${clerk.issuer}")
     private String clerkIssuer;
 
+    @Value("${clerk.enforce-auth:true}")
+    private boolean enforceAuth;
+
     private final ClerkJwksProvider jwksProvider;
 
     @Override
@@ -42,27 +45,27 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Authorization header missing/invalid");
+            if (enforceAuth) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Authorization header missing/invalid");
+                return;
+            }
+            filterChain.doFilter(request, response);
             return;
         }
 
         try {
             String token = authHeader.substring(7);
-
-            // extract the kid from token header
             String[] chunks = token.split("\\.");
             String headerJson = new String(Base64.getUrlDecoder().decode(chunks[0]));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode headerNode = mapper.readTree(headerJson);
             String kid = headerNode.get("kid").asText();
 
-            // get the correct public key
             PublicKey publicKey = jwksProvider.getPublicKey(kid);
 
-            // verify the token
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(publicKey)
-                    .setAllowedClockSkewSeconds(60) // allow 60 seconds
+                    .setAllowedClockSkewSeconds(60)
                     .requireIssuer(clerkIssuer)
                     .build()
                     .parseClaimsJws(token)
@@ -75,9 +78,14 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             filterChain.doFilter(request, response);
+
         } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token");
-            return;
+            if (enforceAuth) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token");
+                return;
+            }
+            System.err.println("JWT validation failed: " + e.getMessage());
+            filterChain.doFilter(request, response);
         }
     }
 }

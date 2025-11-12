@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.security;
+package in.amantiwari.invoicegeneratorapi.security;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

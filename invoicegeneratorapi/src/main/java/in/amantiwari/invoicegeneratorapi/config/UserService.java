@@ -1,7 +1,7 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.amantiwari.invoicegeneratorapi.config;
 
-import in.bushansirgur.invoicegeneratorapi.entity.User;
-import in.bushansirgur.invoicegeneratorapi.repository.UserRepository;
+import in.amantiwari.invoicegeneratorapi.entity.User;
+import in.amantiwari.invoicegeneratorapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -40,3 +40,4 @@ public class UserService {
         return existingUser;
     }
 }
+

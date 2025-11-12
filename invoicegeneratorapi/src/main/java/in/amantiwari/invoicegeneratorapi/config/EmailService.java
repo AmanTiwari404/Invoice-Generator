@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.amantiwari.invoicegeneratorapi.config;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -35,3 +35,4 @@ public class EmailService {
         mailSender.send(message);
     }
 }
+

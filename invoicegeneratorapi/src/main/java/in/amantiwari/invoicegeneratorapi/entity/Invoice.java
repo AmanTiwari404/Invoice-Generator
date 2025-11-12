@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.entity;
+package in.amantiwari.invoicegeneratorapi.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

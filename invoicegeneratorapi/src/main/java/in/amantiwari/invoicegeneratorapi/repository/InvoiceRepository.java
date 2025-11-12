@@ -1,6 +1,6 @@
-package in.bushansirgur.invoicegeneratorapi.repository;
+package in.amantiwari.invoicegeneratorapi.repository;
 
-import in.bushansirgur.invoicegeneratorapi.entity.Invoice;
+import in.amantiwari.invoicegeneratorapi.entity.Invoice;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

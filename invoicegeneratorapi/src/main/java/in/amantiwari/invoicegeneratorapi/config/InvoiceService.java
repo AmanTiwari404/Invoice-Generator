@@ -1,7 +1,7 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.amantiwari.invoicegeneratorapi.config;
 
-import in.bushansirgur.invoicegeneratorapi.entity.Invoice;
-import in.bushansirgur.invoicegeneratorapi.repository.InvoiceRepository;
+import in.amantiwari.invoicegeneratorapi.entity.Invoice;
+import in.amantiwari.invoicegeneratorapi.repository.InvoiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,3 +27,4 @@ public class InvoiceService {
         repository.delete(existingInvoice);
     }
 }
+
